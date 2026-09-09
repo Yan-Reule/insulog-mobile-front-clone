@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/enum_clock_register.dart';
 import 'package:insulog/services/api/data_service.dart';
 import 'package:insulog/states/clock_state.dart';
+import 'package:insulog/widgets/app_notification.dart';
 
 class ClockRecordListWidget extends StatelessWidget {
   final Size size;
@@ -85,7 +86,7 @@ class _ClockRecordCardState extends State<_ClockRecordCard> {
     "DOM",
   ];
   bool isPressed = false;
-  
+
   List<String> get diasSemanaSelec => widget.record.diasSemana is String
       ? (widget.record.diasSemana as String)
             .split(',')
@@ -246,7 +247,12 @@ class _ClockRecordCardState extends State<_ClockRecordCard> {
                   states,
                 ) {
                   if (!states.contains(WidgetState.selected)) {
-                    return const Color.fromARGB(0, 102, 95, 95); // borda quando inativo
+                    return const Color.fromARGB(
+                      0,
+                      102,
+                      95,
+                      95,
+                    ); // borda quando inativo
                   }
 
                   return const Color(0xFF3EA75F); // borda quando ativo
@@ -265,9 +271,7 @@ class _ClockRecordCardState extends State<_ClockRecordCard> {
                             return;
                           }
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.message)),
-                          );
+                          AppNotification.error(context, e.message);
                         }
                       },
               ),

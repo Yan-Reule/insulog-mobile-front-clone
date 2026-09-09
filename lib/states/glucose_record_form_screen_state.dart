@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:another_flushbar/flushbar.dart'; 
 import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/enum_form_registroGlicose.dart';
 import 'package:insulog/DTO/ENUMs/enum_periodo_registroGlicose.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroGlicose.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroInsulina.dart';
+import 'package:insulog/widgets/app_notification.dart';
 import 'package:insulog/globals.dart';
 import 'package:insulog/services/api/data_service.dart';
 import 'package:insulog/services/local/saved_login_service.dart';
@@ -391,13 +391,10 @@ class GlucoseRecordFormScreenState extends ChangeNotifier {
     if (_isErroGlicose || _isErroPeriodo || _isErroInsulina) {
       // _goToFirstErrorStep();
 
-      Flushbar(
-        flushbarPosition: FlushbarPosition.TOP,
-        message: 'Erro!',
-        messageColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-        duration: const Duration(seconds: 3),
-      ).show(context);
+      AppNotification.warning(
+        context,
+        'Revise os campos destacados antes de continuar.',
+      );
       notifyListeners();
       return;
     }
@@ -427,7 +424,10 @@ class GlucoseRecordFormScreenState extends ChangeNotifier {
       );
 
       if (isEditing) {
-        await DataService().updateRegistroGlicose(_editingRegistroId!, registro);
+        await DataService().updateRegistroGlicose(
+          _editingRegistroId!,
+          registro,
+        );
 
         if (context.mounted) {
           Navigator.pop(context, true);
@@ -443,13 +443,7 @@ class GlucoseRecordFormScreenState extends ChangeNotifier {
   }
 
   void _showApiError(BuildContext context, String message) {
-    Flushbar(
-      flushbarPosition: FlushbarPosition.TOP,
-      message: message,
-      messageColor: Colors.white,
-      backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-      duration: const Duration(seconds: 3),
-    ).show(context);
+    AppNotification.error(context, message);
   }
 
   void next(BuildContext? context) {

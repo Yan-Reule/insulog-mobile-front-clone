@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/clock_alarm_draft.dart';
 import 'package:insulog/DTO/ENUMs/enum_clock_register.dart';
 import 'package:insulog/DTO/ENUMs/enum_form_registroGlicose.dart';
+import 'package:insulog/DTO/ENUMs/enum_historico_registro_glicose.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroGlicose.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroInsulina.dart';
 import 'package:insulog/services/api/api_service.dart';
@@ -15,6 +16,34 @@ class DataService {
   factory DataService() => _instance;
 
   final ApiService _apiService = ApiService();
+
+  Future<HistoricoRegistroGlicoseResponse> fetchHistoricoGlicose(
+    int idUsuario, {
+    required DateTime dataInicio,
+    required DateTime dataFim,
+  }) async {
+    try {
+      final response = await _apiService.get(
+        'registros-glicose/usuario/$idUsuario/historico',
+        queryParameters: {
+          'dataInicio': ApiDateTimeFormatter.format(dataInicio),
+          'dataFim': ApiDateTimeFormatter.format(dataFim),
+        },
+      );
+
+      if (response is Map<String, dynamic>) {
+        return HistoricoRegistroGlicoseResponse.fromJson(response);
+      }
+
+      throw DataException('Resposta inesperada da API.');
+    } on ApiException catch (e) {
+      throw DataException(e.message, statusCode: e.statusCode);
+    } on DataException {
+      rethrow;
+    } catch (e) {
+      throw DataException('Erro ao buscar histórico: $e');
+    }
+  }
 
   Future<RegistrosGlicoseResponse> fetchData(
     int idUsuario,

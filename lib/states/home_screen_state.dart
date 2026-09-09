@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroGlicose.dart';
 import 'package:insulog/globals.dart';
 import 'package:insulog/screens/glucose_record_form_screen.dart';
 import 'package:insulog/services/api/data_service.dart';
+import 'package:insulog/widgets/app_notification.dart';
 import 'package:insulog/services/local/saved_login_service.dart';
 import 'package:insulog/widgets/custom_button_widget.dart';
 
@@ -420,13 +420,7 @@ class HomeScreenState extends ChangeNotifier {
       Globals().setUsername(credenciais.username);
     }
 
-    Flushbar(
-      flushbarPosition: FlushbarPosition.TOP,
-      message: 'Login realizado com sucesso!',
-      messageColor: Colors.white,
-      backgroundColor: const Color.fromARGB(255, 66, 165, 69),
-      duration: const Duration(seconds: 3),
-    ).show(context);
+    AppNotification.success(context, 'Login realizado com sucesso!');
 
     await refreshRecords();
   }
@@ -576,13 +570,7 @@ class _EditRegistroButtonState extends State<_EditRegistroButton> {
       await widget.onEdit();
     } on DataException catch (e) {
       if (mounted) {
-        Flushbar(
-          flushbarPosition: FlushbarPosition.TOP,
-          message: e.message,
-          messageColor: Colors.white,
-          backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        AppNotification.error(context, e.message);
       }
     } finally {
       if (mounted) {

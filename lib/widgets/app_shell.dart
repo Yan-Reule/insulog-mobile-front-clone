@@ -14,11 +14,11 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   int index = 0;
 
-  final List<Widget> pages = const [
-    HomePage(),
-    ClockPage(),
+  final List<Widget> pages = [
+    const HomePage(),
+    const ClockPage(),
     ReportPage(),
-    OptionsPage(),
+    const OptionsPage(),
     // RegistroPage(),
   ];
 

@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/clock_alarm_draft.dart';
 import 'package:insulog/DTO/ENUMs/enum_clock_register.dart';
@@ -7,6 +6,7 @@ import 'package:insulog/services/api/data_service.dart';
 import 'package:insulog/services/local/alarm_platform_service.dart';
 import 'package:insulog/services/local/saved_login_service.dart';
 import 'package:insulog/widgets/custom_button_widget.dart';
+import 'package:insulog/widgets/app_notification.dart';
 
 class ClockState extends ChangeNotifier {
   ClockState._();
@@ -123,13 +123,7 @@ class ClockState extends ChangeNotifier {
   }
 
   void _showMessage(BuildContext context, String message) {
-    Flushbar(
-      flushbarPosition: FlushbarPosition.TOP,
-      message: message,
-      messageColor: Colors.white,
-      backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-      duration: const Duration(seconds: 3),
-    ).show(context);
+    AppNotification.error(context, message);
   }
 
   void updateNewAlarmHour(int hour) {
@@ -339,9 +333,8 @@ class ClockState extends ChangeNotifier {
 
     final agora = DateTime.now();
     alarmesAtivos.sort(
-      (a, b) => _proximaOcorrencia(a, agora).compareTo(
-        _proximaOcorrencia(b, agora),
-      ),
+      (a, b) =>
+          _proximaOcorrencia(a, agora).compareTo(_proximaOcorrencia(b, agora)),
     );
     final proximoAlarme = alarmesAtivos.first;
 
@@ -732,13 +725,7 @@ class _DeleteAlarmButtonState extends State<_DeleteAlarmButton> {
       await widget.onDelete();
     } on DataException catch (e) {
       if (mounted) {
-        Flushbar(
-          flushbarPosition: FlushbarPosition.TOP,
-          message: e.message,
-          messageColor: Colors.white,
-          backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-          duration: const Duration(seconds: 3),
-        ).show(context);
+        AppNotification.error(context, e.message);
 
         setState(() {
           _isDeleting = false;

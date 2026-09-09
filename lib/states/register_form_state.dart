@@ -1,6 +1,6 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:insulog/services/api/auth_service.dart';
+import 'package:insulog/widgets/app_notification.dart';
 
 class RegisterFormState extends ChangeNotifier {
   RegisterFormState() {
@@ -65,24 +65,18 @@ class RegisterFormState extends ChangeNotifier {
       registerError = e.message;
       isLoading = false;
 
-      Flushbar(
-        flushbarPosition: FlushbarPosition.TOP,
-        message: e.message,
-        messageColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-        duration: const Duration(seconds: 3),
-      ).show(context);
+      AppNotification.error(context, e.message);
 
-      if (e.statusCode == 400){
+      if (e.statusCode == 400) {
         username.isEmpty ? usernameError = 'Campo obrigatorio' : null;
         email.isEmpty ? emailError = 'Campo obrigatorio' : null;
         password.isEmpty ? passwordError = 'Campo obrigatorio' : null;
       }
 
-      if (e.statusCode == 409){
+      if (e.statusCode == 409) {
         registerError = "Ja existe um usuario com esse e-mail";
       }
-    } catch (_){
+    } catch (_) {
       registerError = 'Erro inesperado.';
       isLoading = false;
       usernameError = null;
@@ -90,13 +84,7 @@ class RegisterFormState extends ChangeNotifier {
       emailError = null;
       passwordError = null;
 
-      Flushbar(
-        flushbarPosition: FlushbarPosition.TOP,
-        message: 'Erro inesperado.',
-        messageColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-        duration: const Duration(seconds: 3),
-      ).show(context);
+      AppNotification.error(context, 'Erro inesperado.');
     }
 
     notifyListeners();
@@ -160,7 +148,7 @@ class RegisterFormState extends ChangeNotifier {
     emailController.clear();
     passwordController.clear();
     registerError = null;
-    isLoading = false; 
+    isLoading = false;
     usernameError = null;
     lastnameError = null;
     emailError = null;

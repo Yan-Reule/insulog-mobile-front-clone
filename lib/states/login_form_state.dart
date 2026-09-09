@@ -1,8 +1,8 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:insulog/globals.dart';
 import 'package:insulog/services/api/auth_service.dart';
 import 'package:insulog/services/local/saved_login_service.dart';
+import 'package:insulog/widgets/app_notification.dart';
 
 class LoginFormState extends ChangeNotifier {
   LoginFormState() {
@@ -69,13 +69,7 @@ class LoginFormState extends ChangeNotifier {
       loginError = e.message;
       isLoading = false;
 
-      Flushbar(
-        flushbarPosition: FlushbarPosition.TOP,
-        message: e.message,
-        messageColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-        duration: const Duration(seconds: 3),
-      ).show(context);
+      AppNotification.error(context, e.message);
 
       if (e.statusCode == 401) {
         usernameAuthError = 'Usuario incorreto';
@@ -90,13 +84,7 @@ class LoginFormState extends ChangeNotifier {
       usernameAuthError = null;
       passwordAuthError = null;
 
-      Flushbar(
-        flushbarPosition: FlushbarPosition.TOP,
-        message: 'Erro inesperado.',
-        messageColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 211, 47, 47),
-        duration: const Duration(seconds: 3),
-      ).show(context);
+      AppNotification.error(context, 'Erro inesperado.');
     }
 
     notifyListeners();
