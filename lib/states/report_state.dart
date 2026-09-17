@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:insulog/DTO/ENUMs/enum_registroGlicose.dart';
 import 'package:insulog/globals.dart';
+import 'package:insulog/services/api/api_service.dart';
+import 'package:insulog/services/api/report_export_service.dart';
 import 'package:insulog/services/api/data_service.dart';
 import 'package:insulog/services/local/saved_login_service.dart';
 
@@ -282,6 +284,37 @@ class ReportState extends ChangeNotifier {
           );
         })
         .toList(growable: false);
+  }
+
+  DateTime get exportStart => DateTime(
+    _selectedDate.year,
+    _selectedDate.month,
+    _selectedDay == 0 ? 1 : _selectedDay,
+  );
+
+  DateTime get exportEnd => _selectedDay == 0
+      ? DateTime(_selectedDate.year, _selectedDate.month + 1, 0)
+      : exportStart;
+
+  Future<ReportFile> exportReport(ReportFormat format) async {
+    final start = exportStart;
+    final end = exportEnd;
+    var userId = Globals().userId;
+    if (userId <= 0) {
+      userId = (await _savedLoginService.getCredentials())?.userId ?? 0;
+    }
+    if (userId <= 0) {
+      throw ApiException(
+        message: 'Entre novamente para exportar o relatório.',
+        statusCode: 401,
+      );
+    }
+    return ReportExportService().fetchReport(
+      userId: userId,
+      start: start,
+      end: end,
+      format: format,
+    );
   }
 
   Future<void> refreshReportRecords() async {
