@@ -1,0 +1,489 @@
+{
+  "mode": "App Express real; banco simulado; HTTP restrito a 127.0.0.1; não valida deploy ou constraints reais.",
+  "registeredRouterHandlers": 48,
+  "exercised": 47,
+  "passwordLeakedToLogs": true,
+  "usersListExposesPasswordHash": true,
+  "anonymousPasswordUpdate": true,
+  "routes": [
+    {
+      "file": "src/routes/authRoutes.js",
+      "line": 6,
+      "method": "POST",
+      "route": "/login",
+      "handler": "authController.login",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Login válido, sem emissão de sessão/token."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 8,
+      "method": "GET",
+      "route": "/usuarios/",
+      "handler": "userController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 9,
+      "method": "GET",
+      "route": "/usuarios/:id",
+      "handler": "userController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 10,
+      "method": "GET",
+      "route": "/usuarios/:tipo_usuario",
+      "handler": "showByType",
+      "status": null,
+      "conclusion": "Inalcançável: GET /:id registrado antes de GET /:tipo_usuario."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 12,
+      "method": "POST",
+      "route": "/usuarios/",
+      "handler": "userController.create",
+      "status": 201,
+      "sqlCalls": 3,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 13,
+      "method": "DELETE",
+      "route": "/usuarios/:id",
+      "handler": "userController.deleteById",
+      "status": 204,
+      "sqlCalls": 4,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/userRoutes.js",
+      "line": 14,
+      "method": "PUT",
+      "route": "/usuarios/:id",
+      "handler": "userController.update",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/typeInsuRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/tipos-insulina/",
+      "handler": "typeInsuController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/typeInsuRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/tipos-insulina/:id",
+      "handler": "typeInsuController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/typeInsuRoutes.js",
+      "line": 8,
+      "method": "POST",
+      "route": "/tipos-insulina/",
+      "handler": "typeInsuController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/typeInsuRoutes.js",
+      "line": 9,
+      "method": "PUT",
+      "route": "/tipos-insulina/:id",
+      "handler": "typeInsuController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/typeInsuRoutes.js",
+      "line": 10,
+      "method": "DELETE",
+      "route": "/tipos-insulina/:id",
+      "handler": "typeInsuController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/periodoRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/periodos/",
+      "handler": "periodoController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/periodoRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/periodos/:id",
+      "handler": "periodoController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/periodoRoutes.js",
+      "line": 8,
+      "method": "POST",
+      "route": "/periodos/",
+      "handler": "periodoController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/periodoRoutes.js",
+      "line": 9,
+      "method": "PUT",
+      "route": "/periodos/:id",
+      "handler": "periodoController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/periodoRoutes.js",
+      "line": 10,
+      "method": "DELETE",
+      "route": "/periodos/:id",
+      "handler": "periodoController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/registros-glicose/",
+      "handler": "registroGlicoseController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/registros-glicose/dashboard",
+      "handler": "registroGlicoseController.getDashboard",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 8,
+      "method": "GET",
+      "route": "/registros-glicose/usuario/:id_usuario/historico",
+      "handler": "registroGlicoseController.getHistorico",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 9,
+      "method": "GET",
+      "route": "/registros-glicose/usuario/:id_usuario",
+      "handler": "registroGlicoseController.showByUserId",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 10,
+      "method": "GET",
+      "route": "/registros-glicose/:id",
+      "handler": "registroGlicoseController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 11,
+      "method": "POST",
+      "route": "/registros-glicose/",
+      "handler": "registroGlicoseController.create",
+      "status": 201,
+      "sqlCalls": 3,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 12,
+      "method": "PUT",
+      "route": "/registros-glicose/:id",
+      "handler": "registroGlicoseController.update",
+      "status": 200,
+      "sqlCalls": 5,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroGlicoseRoutes.js",
+      "line": 13,
+      "method": "DELETE",
+      "route": "/registros-glicose/:id",
+      "handler": "registroGlicoseController.deleteById",
+      "status": 204,
+      "sqlCalls": 4,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/registros-insulina/",
+      "handler": "registroInsulinaController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/registros-insulina/usuario/:id_usuario",
+      "handler": "registroInsulinaController.showByUserId",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 8,
+      "method": "GET",
+      "route": "/registros-insulina/:id",
+      "handler": "registroInsulinaController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 9,
+      "method": "POST",
+      "route": "/registros-insulina/",
+      "handler": "registroInsulinaController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 10,
+      "method": "PUT",
+      "route": "/registros-insulina/:id",
+      "handler": "registroInsulinaController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/registroInsulinaRoutes.js",
+      "line": 11,
+      "method": "DELETE",
+      "route": "/registros-insulina/:id",
+      "handler": "registroInsulinaController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/exportacoes/",
+      "handler": "exportacaoController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/exportacoes/relatorio",
+      "handler": "exportacaoController.gerarRelatorio",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 8,
+      "method": "GET",
+      "route": "/exportacoes/:id",
+      "handler": "exportacaoController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 9,
+      "method": "POST",
+      "route": "/exportacoes/",
+      "handler": "exportacaoController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 10,
+      "method": "PUT",
+      "route": "/exportacoes/:id",
+      "handler": "exportacaoController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/exportacaoRoutes.js",
+      "line": 11,
+      "method": "DELETE",
+      "route": "/exportacoes/:id",
+      "handler": "exportacaoController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/configuracaoRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/configuracoes/",
+      "handler": "configuracaoController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/configuracaoRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/configuracoes/:id",
+      "handler": "configuracaoController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/configuracaoRoutes.js",
+      "line": 8,
+      "method": "POST",
+      "route": "/configuracoes/",
+      "handler": "configuracaoController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/configuracaoRoutes.js",
+      "line": 9,
+      "method": "PUT",
+      "route": "/configuracoes/:id",
+      "handler": "configuracaoController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/configuracaoRoutes.js",
+      "line": 10,
+      "method": "DELETE",
+      "route": "/configuracoes/:id",
+      "handler": "configuracaoController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "route": "/alarmes/",
+      "handler": "alarmeController.index",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 7,
+      "method": "GET",
+      "route": "/alarmes/usuario/:usuarioId",
+      "handler": "alarmeController.showByUsuarioId",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 8,
+      "method": "GET",
+      "route": "/alarmes/:id",
+      "handler": "alarmeController.show",
+      "status": 200,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 9,
+      "method": "POST",
+      "route": "/alarmes/",
+      "handler": "alarmeController.create",
+      "status": 201,
+      "sqlCalls": 1,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 10,
+      "method": "PUT",
+      "route": "/alarmes/:id",
+      "handler": "alarmeController.update",
+      "status": 200,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    },
+    {
+      "file": "src/routes/alarmeRoutes.js",
+      "line": 11,
+      "method": "DELETE",
+      "route": "/alarmes/:id",
+      "handler": "alarmeController.deleteById",
+      "status": 204,
+      "sqlCalls": 2,
+      "conclusion": "Aceita requisição sem cookie/token; banco simulado."
+    }
+  ]
+}
